@@ -32,16 +32,20 @@ def chord_method(a, b, epsilon, f):
         epsilon (float): Точность (разница между текущим и точным значением корня).
         f: функция
 
-
     Returns:
         float: Приближенное значение корня.
     """
-    while abs(b - a) > epsilon:
-        x0 = a - (b - a) * f(a) / (f(b) - f(a))
-        if f(x0) == 0:
+    fa = f(a)
+    fb = f(b)
+    x0 = a - (b - a) * fa / (fb - fa)
+    fx0 = f(x0)
+    while abs(fx0) > epsilon:
+        if fx0 == 0:
             return x0
-        elif f(a) * f(x0) < 0:
-            b = x0
+        elif fa * fx0 < 0:
+            b, fb = x0, fx0
         else:
-            a = x0
-    return (a + b) / 2
+            a, fa = x0, fx0
+        x0 = a - (b - a) * fa / (fb - fa)
+    return x0
+

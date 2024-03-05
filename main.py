@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import time
 
 from methods import bisection_method, chord_method
 
@@ -24,16 +25,17 @@ def find_roots(a, b, epsilon, method):
     roots = []
     while a < b:
         if f(a) * f(a + epsilon) < 0:
-            root = method(a, a + epsilon, epsilon, f)  # Используйте метод бисекции
+            root = method(a, a + epsilon, epsilon, f)
             roots.append(root)
         a += epsilon
     return roots
 
 
+start_time = time.time()
 # Пример использования:
 left = 0  # Левая граница отрезка
 right = 8.0  # Правая граница отрезка
-e = 1e-2  # Точность
+e = 1e-6  # Точность
 
 all_roots = find_roots(left, right, e, chord_method)
 print(f"Приближенные корни на отрезке [{left}, {right}]: {all_roots}")
@@ -51,5 +53,9 @@ plt.ylabel("f(x)")
 plt.title("График функции f(x)")
 plt.grid(True)
 plt.legend()
+
+end_time = time.time()
+print(f'время выполнения {end_time - start_time}')
+
 plt.show()
-# Приближенные корни на отрезке [0, 8.0]: [0.8665135000040798, 2.597829500009215, 6.617821500571122]
+# Приближенные корни на отрезке [0, 8.0]: [0.866513143300948, 2.5978299242235683, 6.617821974427504]
