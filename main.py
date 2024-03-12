@@ -1,15 +1,15 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from sympy import *
-import time
+import timeit
 
+from functools import partial
+from sympy import symbols, sin, tanh, diff, lambdify
 from methods import bisection_method, chord_method, newton_method
 
-
 # fill up with your data
-left_border = -100.0
-right_border = 100.0
-epsilon = 1e-5
+left_border = 0
+right_border = 8.0
+epsilon = 1e-4
 methods = [bisection_method, chord_method, newton_method]
 x = symbols('x')
 y = x * (pow(np.e, 4 * sin(x)) - 1) - 2 * (tanh(x) + 8)
@@ -40,7 +40,7 @@ def find_roots(a, b, epsilon, method):
 def show_graph(left, right):
     x = np.linspace(left, right, 1000)
     y = f(x)
-    fig, ax = plt.subplots()
+    _, ax = plt.subplots()
     ax.plot(x, y, label="График функции")
     plt.grid(True)
     plt.legend()
@@ -54,13 +54,12 @@ def run_methods():
 
 
 def run_method(method, left, right, epsilon):
-    start_time = time.time()
     roots = find_roots(left, right, epsilon, method)
-    end_time = time.time()
-    execution_time = end_time - start_time
+    partial_func = partial(find_roots, left, right, epsilon, method)
+    execution_time = timeit.timeit(partial_func, number=5)
     print(f'Время выполнения с методом {str(method).split()[1]}: {execution_time}')
     print(f'Корни: {str(roots)}')
-    show_graph(left, right)
 
 
 run_methods()
+show_graph(left_border, right_border)
