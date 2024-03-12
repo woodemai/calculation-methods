@@ -1,16 +1,4 @@
-def bisection_method(a, b, epsilon, f):
-    """
-    Метод бисекции для нахождения корня уравнения f(x) = 0.
-
-    Args:
-        a (float): Левая граница отрезка.
-        b (float): Правая граница отрезка.
-        epsilon (float): Точность (разница между текущим и точным значением корня).
-        f: функция
-
-    Returns:
-        float: Приближенное значение корня.
-    """
+def bisection_method(a, b, epsilon, f, df):
     while abs(b - a) > 2 * epsilon:
         c = (a + b) / 2
         if f(c) == 0:
@@ -22,19 +10,7 @@ def bisection_method(a, b, epsilon, f):
     return (a + b) / 2
 
 
-def chord_method(a, b, epsilon, f):
-    """
-    Метод пропорциональных частей (метод хорд) для нахождения корня уравнения f(x) = 0.
-
-    Args:
-        a (float): Левая граница отрезка.
-        b (float): Правая граница отрезка.
-        epsilon (float): Точность (разница между текущим и точным значением корня).
-        f: функция
-
-    Returns:
-        float: Приближенное значение корня.
-    """
+def chord_method(a, b, epsilon, f, df):
     fa = f(a)
     fb = f(b)
     x0 = a - (b - a) * fa / (fb - fa)
@@ -49,3 +25,16 @@ def chord_method(a, b, epsilon, f):
         x0 = a - (b - a) * fa / (fb - fa)
     return x0
 
+
+def newton_method(a, b, epsilon, f, df):
+    x0 = b if f(b) * df(b) > 0 else a
+    xn = x0
+    while True:
+        fxn = f(xn)
+        if abs(fxn) < epsilon:
+            return xn
+        dfxn = df(xn)
+        if dfxn == 0:
+            print("Ноль производной. Нет решения.")
+            return None
+        xn = xn - fxn / dfxn

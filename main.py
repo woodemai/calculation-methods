@@ -1,61 +1,66 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from sympy import *
 import time
 
-from methods import bisection_method, chord_method
+from methods import bisection_method, chord_method, newton_method
+
+
+# fill up with your data
+left_border = -100.0
+right_border = 100.0
+epsilon = 1e-5
+methods = [bisection_method, chord_method, newton_method]
+x = symbols('x')
+y = x * (pow(np.e, 4 * sin(x)) - 1) - 2 * (tanh(x) + 8)
+
+
+def derivative_function(func):
+    derivative = diff(func, x)
+    return lambdify(x, derivative, 'numpy')
 
 
 def f(x):
     return x * (pow(np.e, 4 * np.sin(x)) - 1) - 2 * (np.tanh(x) + 8)
 
 
+df = derivative_function(y)
+
+
 def find_roots(a, b, epsilon, method):
-    """
-    Находит все корни уравнения f(x) = 0 на отрезке [a, b].
-
-    Args:
-        a (float): Левая граница отрезка.
-        b (float): Правая граница отрезка.
-        epsilon (float): Точность (разница между текущим и точным значением корня).
-        method: метод для нахождения корней
-
-    Returns:
-        list: Список приближенных значений корней.
-    """
     roots = []
     while a < b:
         if f(a) * f(a + epsilon) < 0:
-            root = method(a, a + epsilon, epsilon, f)
+            root = method(a, a + epsilon, epsilon, f, df=df)
             roots.append(root)
         a += epsilon
     return roots
 
 
-start_time = time.time()
-# Пример использования:
-left = 0  # Левая граница отрезка
-right = 8.0  # Правая граница отрезка
-e = 1e-6  # Точность
+def show_graph(left, right):
+    x = np.linspace(left, right, 1000)
+    y = f(x)
+    fig, ax = plt.subplots()
+    ax.plot(x, y, label="График функции")
+    plt.grid(True)
+    plt.legend()
+    ax.axhline(y=0, color='black', linewidth=2)
+    plt.show()
 
-all_roots = find_roots(left, right, e, chord_method)
-print(f"Приближенные корни на отрезке [{left}, {right}]: {all_roots}")
 
-# Определение области значений x
-x = np.linspace(left - 1, right + 1, 100)
+def run_methods():
+    for method in methods:
+        run_method(method, left_border, right_border, epsilon)
 
-# Вычисление значений функции y = f(x)
-y = f(x)
 
-# Построение графика
-plt.plot(x, y, label="f(x) = 𝑥(𝑒^4sin(𝑥) −1)−2(tanh(𝑥)+8)")
-plt.xlabel("x")
-plt.ylabel("f(x)")
-plt.title("График функции f(x)")
-plt.grid(True)
-plt.legend()
+def run_method(method, left, right, epsilon):
+    start_time = time.time()
+    roots = find_roots(left, right, epsilon, method)
+    end_time = time.time()
+    execution_time = end_time - start_time
+    print(f'Время выполнения с методом {str(method).split()[1]}: {execution_time}')
+    print(f'Корни: {str(roots)}')
+    show_graph(left, right)
 
-end_time = time.time()
-print(f'время выполнения {end_time - start_time}')
 
-plt.show()
-# Приближенные корни на отрезке [0, 8.0]: [0.866513143300948, 2.5978299242235683, 6.617821974427504]
+run_methods()
