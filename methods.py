@@ -1,4 +1,19 @@
-def bisection_method(a, b, epsilon, f, df):
+from sympy import diff, lambdify, symbols, sin, tanh
+import numpy as np
+
+x = symbols('x')
+y = x * (pow(np.e, 4.0 * sin(x)) - 1) - 2 * (tanh(x) + 8)
+
+
+def derivative_function():
+    derivative = diff(y, x)
+    derivative2 = diff(derivative, x)
+    df = lambdify(x, derivative, 'numpy')
+    ddf = lambdify(x, derivative2, 'numpy')
+    return df, ddf
+
+
+def bisection_method(a, b, epsilon, f):
     while abs(b - a) > 2 * epsilon:
         c = (a + b) / 2
         if f(c) == 0:
@@ -10,7 +25,7 @@ def bisection_method(a, b, epsilon, f, df):
     return (a + b) / 2
 
 
-def chord_method(a, b, epsilon, f, df):
+def chord_method(a, b, epsilon, f):
     fa = f(a)
     fb = f(b)
     x0 = a - (b - a) * fa / (fb - fa)
@@ -26,8 +41,10 @@ def chord_method(a, b, epsilon, f, df):
     return x0
 
 
-def newton_method(a, b, epsilon, f, df):
-    x0 = b if f(b) * df(b) > 0 else a
+def newton_method(a, b, epsilon, f):
+    df, ddf = derivative_function()
+
+    x0 = b if f(b) * ddf(b) > 0 else a
     xn = x0
     while True:
         fxn = f(xn)
@@ -35,6 +52,5 @@ def newton_method(a, b, epsilon, f, df):
             return xn
         dfxn = df(xn)
         if dfxn == 0:
-            print("Ноль производной. Нет решения.")
             return None
         xn = xn - fxn / dfxn
