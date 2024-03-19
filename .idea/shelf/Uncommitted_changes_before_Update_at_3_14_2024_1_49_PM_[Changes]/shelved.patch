@@ -1,0 +1,70 @@
+Index: main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import matplotlib.pyplot as plt\r\nimport numpy as np\r\nfrom sympy import *\r\nimport time\r\n\r\nfrom methods import bisection_method, chord_method, newton_method\r\n\r\n\r\n# fill up with your data\r\nleft_border = -100.0\r\nright_border = 100.0\r\nepsilon = 1e-5\r\nmethods = [bisection_method, chord_method, newton_method]\r\nx = symbols('x')\r\ny = x * (pow(np.e, 4 * sin(x)) - 1) - 2 * (tanh(x) + 8)\r\n\r\n\r\ndef derivative_function(func):\r\n    derivative = diff(func, x)\r\n    return lambdify(x, derivative, 'numpy')\r\n\r\n\r\ndef f(x):\r\n    return x * (pow(np.e, 4 * np.sin(x)) - 1) - 2 * (np.tanh(x) + 8)\r\n\r\n\r\ndf = derivative_function(y)\r\n\r\n\r\ndef find_roots(a, b, epsilon, method):\r\n    roots = []\r\n    while a < b:\r\n        if f(a) * f(a + epsilon) < 0:\r\n            root = method(a, a + epsilon, epsilon, f, df=df)\r\n            roots.append(root)\r\n        a += epsilon\r\n    return roots\r\n\r\n\r\ndef show_graph(left, right):\r\n    x = np.linspace(left, right, 1000)\r\n    y = f(x)\r\n    fig, ax = plt.subplots()\r\n    ax.plot(x, y, label=\"График функции\")\r\n    plt.grid(True)\r\n    plt.legend()\r\n    ax.axhline(y=0, color='black', linewidth=2)\r\n    plt.show()\r\n\r\n\r\ndef run_methods():\r\n    for method in methods:\r\n        run_method(method, left_border, right_border, epsilon)\r\n\r\n\r\ndef run_method(method, left, right, epsilon):\r\n    start_time = time.time()\r\n    roots = find_roots(left, right, epsilon, method)\r\n    end_time = time.time()\r\n    execution_time = end_time - start_time\r\n    print(f'Время выполнения с методом {str(method).split()[1]}: {execution_time}')\r\n    print(f'Корни: {str(roots)}')\r\n    show_graph(left, right)\r\n\r\n\r\nrun_methods()\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/main.py b/main.py
+--- a/main.py	
++++ b/main.py	
+@@ -7,9 +7,9 @@
+ 
+ 
+ # fill up with your data
+-left_border = -100.0
+-right_border = 100.0
+-epsilon = 1e-5
++left_border = 0
++right_border = 6.0
++epsilon = 1e-4
+ methods = [bisection_method, chord_method, newton_method]
+ x = symbols('x')
+ y = x * (pow(np.e, 4 * sin(x)) - 1) - 2 * (tanh(x) + 8)
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"b5715bfe-1f92-4767-9a1d-999f135e688c\" name=\"Changes\" comment=\"optimize\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/main.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/main.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/methods.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/methods.py\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 2\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2dHLRS04PNpBG7sPMZ5jg6Nhbjx\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Python.main.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.methods.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\woodemai\\Projects\\calculation-methods\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-python-sdk-d68999036c7f-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.14475.56\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"b5715bfe-1f92-4767-9a1d-999f135e688c\" name=\"Changes\" comment=\"\" />\r\n      <created>1709660049095</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1709660049095</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"initial commit\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1709663655157</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1709663655157</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"optimize\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1709668463833</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1709668463833</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"initial commit\" />\r\n    <MESSAGE value=\"optimize\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"optimize\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <default-breakpoints>\r\n        <breakpoint type=\"python-exception\">\r\n          <properties notifyOnTerminate=\"true\" exception=\"BaseException\">\r\n            <option name=\"notifyOnTerminate\" value=\"true\" />\r\n          </properties>\r\n        </breakpoint>\r\n      </default-breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,10 +4,8 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="b5715bfe-1f92-4767-9a1d-999f135e688c" name="Changes" comment="optimize">
++    <list default="true" id="b5715bfe-1f92-4767-9a1d-999f135e688c" name="Changes" comment="add task 3">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/methods.py" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -79,13 +77,22 @@
+       <option name="project" value="LOCAL" />
+       <updated>1709668463833</updated>
+     </task>
+-    <option name="localTasksCounter" value="3" />
++    <task id="LOCAL-00003" summary="add task 3">
++      <option name="closed" value="true" />
++      <created>1710274482081</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1710274482081</updated>
++    </task>
++    <option name="localTasksCounter" value="4" />
+     <servers />
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="initial commit" />
+     <MESSAGE value="optimize" />
+-    <option name="LAST_COMMIT_MESSAGE" value="optimize" />
++    <MESSAGE value="add task 3" />
++    <option name="LAST_COMMIT_MESSAGE" value="add task 3" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>

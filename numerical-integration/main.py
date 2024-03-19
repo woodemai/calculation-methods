@@ -1,6 +1,6 @@
 import timeit
 from functools import partial
-
+import numpy as np
 
 def rectangle_method(f, a, b, n):
     h = (b - a) / n
@@ -15,7 +15,7 @@ def measure_execution_time(func, *args, **kwargs):
 
 
 def f(x):
-    return x / (x**5 + 1)
+    return np.sin(x) * np.sinh(x)
 
 
 a = 0
