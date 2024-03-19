@@ -14,6 +14,7 @@ methods = [bisection_method, chord_method, newton_method]
 def f(x):
     return x * (pow(np.e, 4 * np.sin(x)) - 1) - 2 * (np.tanh(x) + 8)
 
+
 def find_roots(a, b, epsilon, method):
     roots = []
     while a < b:

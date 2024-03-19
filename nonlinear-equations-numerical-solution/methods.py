@@ -1,11 +1,10 @@
 from sympy import diff, lambdify, symbols, sin, tanh
 import numpy as np
 
-x = symbols('x')
-y = x * (pow(np.e, 4.0 * sin(x)) - 1) - 2 * (tanh(x) + 8)
-
 
 def derivative_function():
+    x = symbols('x')
+    y = x * (pow(np.e, 4.0 * sin(x)) - 1) - 2 * (tanh(x) + 8)
     derivative = diff(y, x)
     derivative2 = diff(derivative, x)
     df = lambdify(x, derivative, 'numpy')
@@ -54,3 +53,4 @@ def newton_method(a, b, epsilon, f):
         if dfxn == 0:
             return None
         xn = xn - fxn / dfxn
+
