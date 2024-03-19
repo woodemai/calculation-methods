@@ -1,6 +1,6 @@
 import timeit
 from functools import partial
-import numpy as np
+
 
 def rectangle_method(f, a, b, n):
     h = (b - a) / n
@@ -15,7 +15,7 @@ def measure_execution_time(func, *args, **kwargs):
 
 
 def f(x):
-    return np.sin(x) * np.sinh(x)
+    return x / (x ** 5 + 1)
 
 
 a = 0
@@ -25,15 +25,3 @@ n = 1000
 execution_time, result = measure_execution_time(rectangle_method, f, a, b, n)
 print(f"The integral of f from {a} to {b} is approximately {result}.")
 print(f"The execution time was {execution_time} seconds.")
-
-
-
-
-
-
-
-
-
-
-
-
