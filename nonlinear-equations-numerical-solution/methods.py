@@ -1,10 +1,11 @@
 from sympy import diff, lambdify, symbols, sin, tanh
 import numpy as np
 
+x = symbols('x')
+y = x * (pow(np.e, 4.0 * sin(x)) - 1) - 2 * (tanh(x) + 8)
 
-def derivative_function():
-    x = symbols('x')
-    y = x * (pow(np.e, 4.0 * sin(x)) - 1) - 2 * (tanh(x) + 8)
+
+def derivative_function(x, y):
     derivative = diff(y, x)
     derivative2 = diff(derivative, x)
     df = lambdify(x, derivative, 'numpy')
@@ -41,7 +42,7 @@ def chord_method(a, b, epsilon, f):
 
 
 def newton_method(a, b, epsilon, f):
-    df, ddf = derivative_function()
+    df, ddf = derivative_function(x,y)
 
     x0 = b if f(b) * ddf(b) > 0 else a
     xn = x0
