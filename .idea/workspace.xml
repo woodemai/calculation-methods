@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5715bfe-1f92-4767-9a1d-999f135e688c" name="Changes" comment="add task 3">
-      <change afterPath="$PROJECT_DIR$/numerical-integration/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/numerical-integration/methods.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/numerical-integration/readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/calculation-methods.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/calculation-methods.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_14_2024_1_49_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_14_2024_1_49_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/nonlinear-equations-numerical-solution/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/nonlinear-equations-numerical-solution/methods.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nonlinear-equations-numerical-solution/methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/nonlinear-equations-numerical-solution/methods.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/numerical-integration/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/numerical-integration/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +25,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -48,7 +51,7 @@
     "Python.methods.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Users/woodemai/Projects/calculation-methods",
     "settings.editor.selected.configurable": "preferences.editor"
   }
