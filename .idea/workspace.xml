@@ -51,11 +51,11 @@
     "Python.methods.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "master",
     "last_opened_file_path": "C:/Users/woodemai/Projects/calculation-methods",
     "settings.editor.selected.configurable": "preferences.editor"
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\woodemai\Projects\calculation-methods\nonlinear-equations-numerical-solution" />
