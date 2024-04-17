@@ -16,7 +16,7 @@ def measure_execution_time(func, *args, **kwargs):
 
 a = 1
 b = 8
-n = 1000
+n = 1000000
 methods = [rectangle_method, trapezoid_method, simpson_method]
 
 for method in methods:
