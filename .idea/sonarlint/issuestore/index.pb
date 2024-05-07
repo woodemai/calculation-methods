@@ -1,6 +1,4 @@
 
-7
-main.py,f\1\f1bdda93d9a278e358509d498e17d97764c1fb29
 M
 numerical-integration/main.py,f\3\f376f1560990680fe6ebb38be2b96bdd542ad60b
 P
@@ -31,3 +29,8 @@ G.idea/sonarlint/issuestore/f/1/f1bdda93d9a278e358509d498e17d97764c1fb29,0\e\0e
 Q.idea/sonarlint/securityhotspotstore/f/3/f376f1560990680fe6ebb38be2b96bdd542ad60b,0\0\000757bcd99fff7b7f418aa48b6ed2e8688d1dc6
 w
 G.idea/sonarlint/issuestore/f/3/f376f1560990680fe6ebb38be2b96bdd542ad60b,d\8\d858084589abca7d4a6b5bfa6c073882f34267cf
+O
+system-linear-equations/main.py,b\0\b0654607dc369f22104f02a84648bacd569545fa
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
