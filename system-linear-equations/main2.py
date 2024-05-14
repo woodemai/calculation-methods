@@ -1,27 +1,45 @@
 import numpy as np
 
 
-def gauss_seidel(A, b, eps, max_iter=1000, sm_eps=1e-10, max_val=1e20):
+def gauss_seidel(A, b, x0, max_iterations=10000, tolerance=1e-6):
+    """
+    Находит решение системы линейных уравнений Ax = b методом Гаусса-Зейделя.
+
+    Args:
+        A (numpy.ndarray): Матрица коэффициентов.
+        b (numpy.ndarray): Вектор свободных членов.
+        x0 (numpy.ndarray): Начальное приближение решения.
+        max_iterations (int): Максимальное количество итераций.
+        tolerance (float): Допустимая погрешность.
+
+    Returns:
+        tuple: Кортеж, содержащий решение (если оно найдено) и флаг успеха операции.
+    """
     n = len(A)
-    x = np.zeros_like(b)
+    x = x0.copy().astype(float)
 
-    for _ in range(max_iter):
-        old_x = np.copy(x)
+    for iteration in range(max_iterations):
+        prev_x = x.copy()
+
         for i in range(n):
-            temp1 = np.dot(A[i, :i], x[:i])
-            temp2 = np.dot(A[i, i + 1:], x[i + 1:])
-            x[i] = (b[i] - temp1 - temp2) / (A[i, i] + eps)
-            print(x)
-            if np.abs(x[i]) > max_val or sm_eps > np.abs(x[i]):
-                raise ValueError("The method did not converge. The values are approaching infinity.")
-        if np.sqrt(np.dot(x - old_x, x - old_x)) < eps:
-            return x
+            x[i] = (b[i] - np.dot(A[i, :i], x[:i]) - np.dot(A[i, i + 1:], prev_x[i + 1:])) / A[i, i]
+
+        if np.linalg.norm(x - prev_x) < tolerance:
+            return x, True
+
+    return None, False
 
 
+# Пример использования
 A = np.array([[0.32, -0.42, 0.85],
               [0.63, -1.43, -0.58],
-              [0.84, -2.23, -0.52]], dtype=float)
-b = np.array([1.32, 0.44, 0.64], dtype=float)
+              [0.84, -2.23, -0.52]])
+b = np.array([1.32, 0.44, 0.64])
+x0 = np.array([0, 0, 0])
 
-solution = gauss_seidel(A, b, 1e-20)
-print("Решение:", solution)
+x, success = gauss_seidel(A, b, x0)
+
+if success:
+    print(f"Решение системы уравнений: {x}")
+else:
+    print("Не удалось найти решение системы уравнений")
