@@ -30,7 +30,7 @@ def euler_method(f, x0, y0, xn, n):
 
 
 def f(x, y):
-    return (2 * x - y * np.pow(np.e, x)) / np.pow(np.e, x)  # dy/dx = x - y**2
+    return (2 * x - y * pow(np.e, x)) / pow(np.e, x)  # dy/dx = x - y**2
 
 
 x0 = 0  # Начальное значение x

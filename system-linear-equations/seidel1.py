@@ -20,12 +20,10 @@ def gauss_seidel(matrix, vector, max_iter=100, tol=1e-6):
     return x
 
 
-matrix = np.array([
-    [0.34, 0.71, 0.63],
-    [0.71, -0.65, -0.18],
-    [1.17, -2.35, 0.75]
-])
-vector = np.array([2.08, 0.17, 1.28])
+matrix = np.array([[0.32, -0.42, 0.85],
+              [0.63, -1.43, -0.58],
+              [0.84, -2.23, -0.52]])
+vector = np.array([1.32, 0.44, 0.64])
 
 solution = gauss_seidel(matrix, vector, max_iter=1000, tol=0.0001)
 
