@@ -1,5 +1,5 @@
 import numpy as np
-
+import matplotlib.pyplot as plt
 
 def euler_method(f, x0, y0, xn, n):
     """
@@ -30,13 +30,13 @@ def euler_method(f, x0, y0, xn, n):
 
 
 def f(x, y):
-    return (2 * x - y * pow(np.e, x)) / pow(np.e, x)  # dy/dx = x - y**2
+    return (2 * x - y * pow(np.e, x)) / pow(np.e, x)
 
 
 x0 = 0  # Начальное значение x
 y0 = 0  # Начальное значение y
 xn = 10  # Конечное значение x
-n = 10  # Количество шагов
+n = 1000  # Количество шагов
 
 x, y = euler_method(f, x0, y0, xn, n)
 
@@ -44,3 +44,11 @@ print("Значения x:")
 print(x)
 print("Значения y:")
 print(y)
+plt.figure(figsize=(10, 10))
+plt.plot(x, y, label='Euler method')
+plt.title('Solution of the differential equation using Euler method')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.grid(True)
+plt.show()

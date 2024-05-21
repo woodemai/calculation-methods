@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def check_convergence(A):
+def check_seidel_convergence(A):
     n = len(A)
     for i in range(n):
         row_sum = sum(abs(A[i, j]) for j in range(n) if j != i)
@@ -33,7 +33,7 @@ A = np.array([[0.32, -0.42, 0.85],
 b = np.array([1.32, 0.44, 0.64])
 x0 = np.array([0, 0, 0])
 
-if check_convergence(A):
+if check_seidel_convergence(A):
     x, success = gauss_seidel(A, b, x0)
 
     if success:
@@ -42,4 +42,3 @@ if check_convergence(A):
         print("Не удалось найти решение системы уравнений")
 else:
     print("Метод Гаусса-Зейделя не сходится для данной системы уравнений")
-[]
